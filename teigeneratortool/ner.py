@@ -16,8 +16,8 @@ titles = ['Mr.', 'Miss', 'Mrs.', 'Ms.', 'Lady', 'Dr.', 'Madame', 'M.', 'Mme.',
           'Mlle.', 'Sir', 'Major']
 ship_titles = ['SS', 'S.S.', 'SS.']
 
-output_dir = os.path.join('teigeneratortool', 'temp')
-with open(os.path.join('teigeneratortool', 'temp', 'stanford_ner_output.txt'), 'r') as f:
+output_dir = os.path.join('/home/eslamelsawy/teigeneratortool/teigeneratortool', 'temp')
+with open(os.path.join('/home/eslamelsawy/teigeneratortool/teigeneratortool', 'temp', 'stanford_ner_output.txt'), 'r') as f:
     content = f.read()
 content = re.sub('<PERSON>', '<persName>', content)
 content = re.sub('</PERSON>', '</persName>', content)
@@ -32,7 +32,7 @@ for node in soup.find_all('orgname'):
     node.string = re.sub(r'\n', u'</orgName>\n', str(node.string))
 for node in soup.find_all('placename'):
     node.string = re.sub(r'\n', u'</placeName>\n', str(node.string))
-             
+
 soup = str(soup)
 soup = re.sub('&lt;', '<', soup)
 soup = re.sub('&gt;', '>', soup)
@@ -44,16 +44,16 @@ soup = re.sub('orgname', 'orgName', soup)
 
 with open(os.path.join(output_dir, 'ner_output.txt'), 'w') as f:
     f.write(soup)
-        
+
 
 with open(os.path.join(output_dir, 'ner_output.txt'), 'r') as f:
     content = f.read()
 soup = BeautifulSoup(content, 'lxml')
 
-elems = []    
+elems = []
 p = soup.p
 e = soup.p.next_element
-elems.append(e)  
+elems.append(e)
 while e.next_sibling:
     e = e.next_sibling
     elems.append(e)
@@ -86,7 +86,7 @@ person_names = []
 
 with open(os.path.join(output_dir, 'ner_output.txt'), 'r') as f:
     content = f.read()
-soup = BeautifulSoup(content, 'lxml')                
+soup = BeautifulSoup(content, 'lxml')
 for node in soup.find_all(['orgname', 'placename', 'persname']):
     if 'S.S.' in node.text or 'SS. ' in node.text:
         node.name = 'name'
@@ -120,14 +120,14 @@ for i in range(0, len(person_dict)):
     for j in range(0, len(person_dict)):
         lex_sim_mat[i, j] = jaro_winkler(person_dict[i], person_dict[j])
 
-elems = []    
+elems = []
 p = soup.p
 e = soup.p.next_element
-elems.append(e)  
+elems.append(e)
 while e.next_sibling:
     e = e.next_sibling
     elems.append(e)
-    
+
 contexts = []
 for e in elems:
     if e.name == 'persname':
@@ -139,7 +139,7 @@ tfidf_vecs = tfidf.fit_transform(contexts)
 svd = TruncatedSVD(200)
 normalizer = Normalizer(copy = False)
 pipeline = make_pipeline(svd, normalizer)
-vecs = pipeline.fit_transform(tfidf_vecs)   
+vecs = pipeline.fit_transform(tfidf_vecs)
 sem_sim_mat = cosine_similarity(vecs)
 
 sim_mat = lex_sim_mat + sem_sim_mat
@@ -157,7 +157,7 @@ for i in range(0, num_clusters):
     cluster_name = '#' + cluster_name
     cluster_name = re.sub(' ', '_', cluster_name)
     cluster_dict[i] = cluster_name
-    
+
 ref_dict = dict()
 for ix in person_dict.keys():
     ref_dict[ix] = cluster_dict[clusters[ix]]
@@ -171,7 +171,7 @@ for e in elems:
         else:
             e['ref'] = ref_dict[ix]
         ix += 1
-        
+
 soup = str(soup)
 soup = re.sub('</p></body></html>', '', soup)
 soup = re.sub('<html><body><p>', '', soup)
@@ -181,7 +181,7 @@ soup = re.sub('orgname', 'orgName', soup)
 
 
 with open(os.path.join(output_dir, 'ner_output.txt'), 'w') as f:
-    f.write(soup)   
+    f.write(soup)
 
-    
+
 
