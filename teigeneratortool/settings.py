@@ -25,8 +25,9 @@ SECRET_KEY = '-se*u#e0w5s@05^)9#05gn**-1&s8i4++@nxysz=_a^@sih+y_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['eslamelsawy.pythonanywhere.com']
+ALLOWED_HOSTS = ["pentimento.dreamhosters.com", "www.pentimento.dreamhosters.com"]
 
+# allowed host for python anywhere 'eslamelsawy.pythonanywhere.com'
 
 # Application definition
 
@@ -125,4 +126,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = '/home/eslamelsawy/teigeneratortool/static'
+# pythonanywhere
+#STATIC_ROOT = '/home/eslamelsawy/teigeneratortool/static'
+
+# dreamhost
+STATIC_ROOT = os.path.dirname(BASE_DIR) + '/public/static/'
+
