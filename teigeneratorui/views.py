@@ -24,14 +24,14 @@ def generatemarkup(request):
     json_data = json.loads(request.body)
 
     #option 1
-    with open(os.path.join('/home/newbook/pentimento.dreamhosters.com/teigeneratortool/teigeneratortool', 'temp', 'input.txt'), 'w') as f:
-        f.write(json_data['text'])
-
-    # Call named entity component
-    subprocess.call('/home/newbook/pentimento.dreamhosters.com/teigeneratortool/teigeneratortool/ner.sh /home/newbook/pentimento.dreamhosters.com/teigeneratortool/teigeneratortool/temp/input.txt', shell=True)
-
-    with open(os.path.join('/home/newbook/pentimento.dreamhosters.com/teigeneratortool/teigeneratortool', 'temp', 'ner_output.txt'), 'r') as f:
-        json_data['text'] = f.read()
+    # with open(os.path.join('/home/newbook/pentimento.dreamhosters.com/teigeneratortool/teigeneratortool', 'temp', 'input.txt'), 'w') as f:
+    #     f.write(json_data['text'])
+    #
+    # # Call named entity component
+    # subprocess.call('/home/newbook/pentimento.dreamhosters.com/teigeneratortool/teigeneratortool/ner.sh /home/newbook/pentimento.dreamhosters.com/teigeneratortool/teigeneratortool/temp/input.txt', shell=True)
+    #
+    # with open(os.path.join('/home/newbook/pentimento.dreamhosters.com/teigeneratortool/teigeneratortool', 'temp', 'ner_output.txt'), 'r') as f:
+    #     json_data['text'] = f.read()
 
 
     # option 2
