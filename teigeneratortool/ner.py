@@ -16,8 +16,8 @@ titles = ['Mr.', 'Miss', 'Mrs.', 'Ms.', 'Lady', 'Dr.', 'Madame', 'M.', 'Mme.',
           'Mlle.', 'Sir', 'Major']
 ship_titles = ['SS', 'S.S.', 'SS.']
 
-output_dir = os.path.join('/home/eslamelsawy/teigeneratortool/teigeneratortool', 'temp')
-with open(os.path.join('/home/eslamelsawy/teigeneratortool/teigeneratortool', 'temp', 'stanford_ner_output.txt'), 'r') as f:
+output_dir = os.path.join('/home/newbook/pentimento.dreamhosters.com/teigeneratortool/teigeneratortool', 'temp')
+with open(os.path.join('/home/newbook/pentimento.dreamhosters.com/teigeneratortool/teigeneratortool', 'temp', 'stanford_ner_output.txt'), 'r') as f:
     content = f.read()
 content = re.sub('<PERSON>', '<persName>', content)
 content = re.sub('</PERSON>', '</persName>', content)
