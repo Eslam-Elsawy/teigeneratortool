@@ -24,7 +24,7 @@ def generatemarkup(request):
     json_data = json.loads(request.body)
 
     #option 1
-    with open(os.path.join('/home/newbook/pentimento.dreamhosters.com/public', 'input.txt'), 'w') as f:
+    with open(os.path.join('/home/newbook/pentimento.dreamhosters.com/public', 'input.txt'), 'w+') as f:
         f.write(json_data['text'])
     #
     # # Call named entity component
