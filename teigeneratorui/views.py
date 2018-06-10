@@ -24,8 +24,8 @@ def generatemarkup(request):
     json_data = json.loads(request.body)
 
     #option 1
-    with open(os.path.join('/home/newbook/pentimento.dreamhosters.com/public', 'input.txt'), 'w+') as f:
-        f.write(json_data['text'])
+    # with open(os.path.join('/home/newbook/pentimento.dreamhosters.com/teigeneratortool/teigeneratortool', 'temp', 'input.txt'), 'w') as f:
+    #     f.write(json_data['text'])
     #
     # # Call named entity component
     # subprocess.call('/home/newbook/pentimento.dreamhosters.com/teigeneratortool/teigeneratortool/ner.sh /home/newbook/pentimento.dreamhosters.com/teigeneratortool/teigeneratortool/temp/input.txt', shell=True)
